@@ -185,8 +185,8 @@ export const BookingModal: React.FC<BookingModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#1E2822]/80 backdrop-blur-sm overflow-y-auto">
-      <div className="relative w-full max-w-2xl bg-[#FDFCF7] text-[#2D3633] rounded-2xl shadow-2xl border border-[#E8E4D9] overflow-hidden my-6">
+    <div className="fixed inset-0 z-50 flex items-start sm:items-center justify-center p-3 sm:p-4 bg-[#1E2822]/80 backdrop-blur-sm overflow-y-auto">
+      <div className="relative w-full max-w-2xl bg-[#FDFCF7] text-[#2D3633] rounded-2xl shadow-2xl border border-[#E8E4D9] overflow-hidden my-4 sm:my-6 max-h-[calc(100dvh-2rem)] overflow-y-auto">
         {/* Modal Header */}
         <div className="bg-[#1E2822] text-[#FDFCF7] p-5 sm:p-6 flex items-start justify-between relative overflow-hidden">
           <div className="relative z-10">

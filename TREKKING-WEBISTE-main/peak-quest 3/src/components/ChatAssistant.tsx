@@ -176,7 +176,7 @@ Would you like more details or packing gear checklists for any of these?`,
             setIsOpen(true);
             setIsMinimized(false);
           }}
-          className="fixed bottom-6 right-6 z-40 bg-[#1E2822] hover:bg-[#2D3633] text-[#FDFCF7] p-3 sm:px-4 sm:py-3.5 rounded-full shadow-2xl border border-[#4A6741]/40 flex items-center gap-3 transition-all duration-300 transform hover:scale-105 group"
+          className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40 bg-[#1E2822] hover:bg-[#2D3633] text-[#FDFCF7] p-3 sm:px-4 sm:py-3.5 rounded-full shadow-2xl border border-[#4A6741]/40 flex items-center gap-3 transition-all duration-300 transform hover:scale-105 group min-h-[48px] min-w-[48px]"
           title="Chat with Assistant"
         >
           <div className="relative">
@@ -202,8 +202,8 @@ Would you like more details or packing gear checklists for any of these?`,
           id="assistant-chat-container"
           className={`fixed z-50 transition-all duration-300 shadow-2xl overflow-hidden border border-[#E8E4D9] flex flex-col ${
             isMinimized
-              ? 'bottom-6 right-6 w-80 h-14 rounded-2xl bg-[#1E2822]'
-              : 'bottom-4 right-4 sm:bottom-6 sm:right-6 w-[92vw] sm:w-[420px] md:w-[460px] h-[580px] max-h-[85vh] rounded-2xl bg-[#FDFCF7]'
+              ? 'bottom-4 right-4 sm:bottom-6 sm:right-6 w-72 sm:w-80 h-14 rounded-2xl bg-[#1E2822]'
+              : 'bottom-3 right-3 sm:bottom-6 sm:right-6 w-[calc(100vw-1.5rem)] sm:w-[420px] md:w-[460px] h-[540px] max-h-[82dvh] rounded-2xl bg-[#FDFCF7]'
           }`}
         >
           {/* Header */}

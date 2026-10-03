@@ -325,7 +325,7 @@ export const TrekMapModal: React.FC<TrekMapModalProps> = ({
         <div className="flex flex-col md:flex-row flex-1 overflow-hidden">
 
           {/* LEFT PANEL */}
-          <div className="w-full md:w-[370px] bg-[#FDFCF7] border-r border-[#E8E4D9] flex flex-col overflow-y-auto shrink-0">
+          <div className="w-full md:w-[370px] bg-[#FDFCF7] border-b md:border-b-0 md:border-r border-[#E8E4D9] flex flex-col overflow-y-auto shrink-0 max-h-[42vh] md:max-h-none">
 
             {/* Trek selector */}
             <div className="p-4 border-b border-[#E8E4D9] flex flex-col gap-2 max-h-[250px] overflow-y-auto">

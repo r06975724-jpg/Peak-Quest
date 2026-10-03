@@ -188,10 +188,10 @@ export const LiveWeatherModal: React.FC<LiveWeatherModalProps> = ({
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#1E2822]/80 backdrop-blur-sm p-3 sm:p-5 overflow-y-auto">
       <div 
         id="live-weather-modal-content"
-        className="bg-[#FDFCF7] text-[#2D3633] w-full max-w-4xl rounded-3xl shadow-2xl border border-[#E8E4D9] overflow-hidden my-auto flex flex-col max-h-[92vh]"
+        className="bg-[#FDFCF7] text-[#2D3633] w-full max-w-4xl rounded-3xl shadow-2xl border border-[#E8E4D9] overflow-hidden my-auto flex flex-col max-h-[calc(100dvh-2rem)]"
       >
         {/* Header */}
-        <div className="bg-[#1E2822] text-[#FDFCF7] p-5 sm:p-6 flex items-center justify-between border-b border-[#2D3633]">
+        <div className="bg-[#1E2822] text-[#FDFCF7] p-4 sm:p-6 flex items-start sm:items-center justify-between border-b border-[#2D3633] gap-2">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-2xl bg-[#4A6741] flex items-center justify-center text-white shadow-inner">
               <CloudSun className="w-6 h-6" />

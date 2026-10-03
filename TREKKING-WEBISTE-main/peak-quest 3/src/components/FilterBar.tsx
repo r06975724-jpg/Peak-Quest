@@ -78,7 +78,7 @@ export const FilterBar: React.FC<FilterBarProps> = ({
       </div>
 
       {/* Filter Controls Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 text-xs">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
         {/* 1. Region Selector */}
         <div>
           <label className="block font-bold text-[#5C6662] uppercase tracking-wider mb-1.5">

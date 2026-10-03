@@ -286,11 +286,25 @@ export const Navbar: React.FC<NavbarProps> = ({
                 setMobileMenuOpen(false);
                 onOpenLiveWeather();
               }}
-              className="w-full py-2.5 px-3 bg-[#4A6741]/15 text-[#2D4F1E] font-bold text-xs rounded-xl flex items-center justify-center gap-2 border border-[#4A6741]/30"
+              className="w-full py-3 px-3 bg-[#4A6741]/15 text-[#2D4F1E] font-bold text-xs rounded-xl flex items-center justify-center gap-2 border border-[#4A6741]/30 min-h-[44px]"
             >
               <CloudSun className="w-4 h-4 text-[#4A6741]" />
-              <span>Open Live Weather Radar</span>
+              <span>Live Weather Radar</span>
             </button>
+
+            {/* Mobile Map Button */}
+            {onOpenMap && (
+              <button
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  onOpenMap();
+                }}
+                className="w-full py-3 px-3 bg-[#F3F1EA] text-[#2D3633] font-bold text-xs rounded-xl flex items-center justify-center gap-2 border border-[#E8E4D9] min-h-[44px]"
+              >
+                <Map className="w-4 h-4 text-[#4A6741]" />
+                <span>Trek Route Map & Directions</span>
+              </button>
+            )}
 
           </div>
         )}

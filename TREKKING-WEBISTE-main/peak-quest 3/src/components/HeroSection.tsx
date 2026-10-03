@@ -96,8 +96,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         <div className="absolute inset-0 bg-gradient-to-t from-[#1E2822] via-[#1E2822]/70 to-[#1E2822]/40" />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20 lg:py-24">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 lg:py-24">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
 
           {/* Left: Hero Text */}
           <div className="max-w-xl space-y-5">
@@ -159,11 +159,11 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               </div>
             </div>
 
-            {/* Trek Pill Selector */}
-            <div className="flex flex-wrap gap-1.5">
+            {/* Trek Pill Selector — horizontally scrollable on mobile */}
+            <div className="flex gap-1.5 overflow-x-auto pb-1 scrollbar-thin">
               {WEATHER_DESTINATIONS.map((t) => (
                 <button key={t.id} onClick={() => setWeatherTrekId(t.id)}
-                  className={`px-2.5 py-1 rounded-lg text-[10px] font-bold transition-all ${weatherTrekId === t.id ? 'bg-[#4A6741] text-white' : 'bg-white/10 text-[#D1CDC0] hover:bg-white/20'}`}>
+                  className={`px-2.5 py-1 rounded-lg text-[10px] font-bold transition-all shrink-0 ${weatherTrekId === t.id ? 'bg-[#4A6741] text-white' : 'bg-white/10 text-[#D1CDC0] hover:bg-white/20'}`}>
                   {t.label}
                 </button>
               ))}
