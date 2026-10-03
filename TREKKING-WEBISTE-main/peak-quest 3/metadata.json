@@ -1,0 +1,6 @@
+{
+  "name": "Peak Quest",
+  "description": "Clean and minimalist Himalayan trekking platform with booking, interactive trail maps, verified hiker reviews, and AI Assistant across Himachal Pradesh and Uttarakhand.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
