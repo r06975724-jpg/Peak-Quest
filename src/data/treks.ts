@@ -65,9 +65,9 @@ export const TREKS_DATA: Trek[] = [
     discountedPriceINR: 5000,
     bestSeasons: ['Spring', 'Summer', 'Autumn'],
     bestMonths: ['March', 'April', 'May', 'September', 'October', 'November'],
-    coverImage: '/images/treks/triund.jpg',
+    coverImage: './images/treks/triund.jpg',
     galleryImages: [
-      '/images/treks/triund.jpg',
+      './images/treks/triund.jpg',
       'https://images.unsplash.com/photo-1551632811-561732d1e306?auto=format&fit=crop&w=1200&q=80',
       'https://images.unsplash.com/photo-1501854140801-50d01698950b?auto=format&fit=crop&w=1200&q=80'
     ],
@@ -161,9 +161,9 @@ export const TREKS_DATA: Trek[] = [
     discountedPriceINR: 5200,
     bestSeasons: ['Autumn', 'Winter', 'Spring'],
     bestMonths: ['October', 'November', 'December', 'January', 'February', 'March', 'April'],
-    coverImage: '/images/treks/nag-tibba.jpg',
+    coverImage: './images/treks/nag-tibba.jpg',
     galleryImages: [
-      '/images/treks/nag-tibba.jpg',
+      './images/treks/nag-tibba.jpg',
       'https://images.unsplash.com/photo-1483728642387-6c3bdd6c93e5?auto=format&fit=crop&w=1200&q=80',
       'https://images.unsplash.com/photo-1589182373726-e4f658ab50f0?auto=format&fit=crop&w=1200&q=80'
     ],
@@ -252,9 +252,9 @@ export const TREKS_DATA: Trek[] = [
     discountedPriceINR: 7999,
     bestSeasons: ['Winter', 'Spring', 'Autumn'],
     bestMonths: ['December', 'January', 'February', 'March', 'April', 'November'],
-    coverImage: '/images/treks/kedarkantha.jpg',
+    coverImage: './images/treks/kedarkantha.jpg',
     galleryImages: [
-      '/images/treks/kedarkantha.jpg',
+      './images/treks/kedarkantha.jpg',
       'https://images.unsplash.com/photo-1573481078535-f07f2f5cc5e2?auto=format&fit=crop&w=1200&q=80',
       'https://images.unsplash.com/photo-1578894381163-e72c17f2d45f?auto=format&fit=crop&w=1200&q=80'
     ],
@@ -378,9 +378,9 @@ export const TREKS_DATA: Trek[] = [
     discountedPriceINR: 10499,
     bestSeasons: ['Summer', 'Monsoon', 'Autumn'],
     bestMonths: ['June', 'July', 'August', 'September', 'October'],
-    coverImage: '/images/treks/hampta-pass.jpg',
+    coverImage: './images/treks/hampta-pass.jpg',
     galleryImages: [
-      '/images/treks/hampta-pass.jpg',
+      './images/treks/hampta-pass.jpg',
       'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=80',
       'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=1200&q=80'
     ],
@@ -504,9 +504,9 @@ export const TREKS_DATA: Trek[] = [
     discountedPriceINR: 5999,
     bestSeasons: ['Summer', 'Autumn', 'Spring'],
     bestMonths: ['May', 'June', 'July', 'September', 'October'],
-    coverImage: '/images/treks/beas-kund.jpg',
+    coverImage: './images/treks/beas-kund.jpg',
     galleryImages: [
-      '/images/treks/beas-kund.jpg',
+      './images/treks/beas-kund.jpg',
       'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=80',
       'https://images.unsplash.com/photo-1596195689404-24d8a8d1c6ea?auto=format&fit=crop&w=1200&q=80'
     ],
@@ -603,9 +603,9 @@ export const TREKS_DATA: Trek[] = [
     discountedPriceINR: 11800,
     bestSeasons: ['Monsoon', 'Summer'],
     bestMonths: ['July', 'August', 'September'],
-    coverImage: '/images/treks/valley-of-flowers.jpg',
+    coverImage: './images/treks/valley-of-flowers.jpg',
     galleryImages: [
-      '/images/treks/valley-of-flowers.jpg',
+      './images/treks/valley-of-flowers.jpg',
       'https://images.unsplash.com/photo-1528360983277-13d401cdc186?auto=format&fit=crop&w=1200&q=80',
       'https://images.unsplash.com/photo-1501854140801-50d01698950b?auto=format&fit=crop&w=1200&q=80'
     ],
@@ -737,9 +737,9 @@ export const TREKS_DATA: Trek[] = [
     discountedPriceINR: 8750,
     bestSeasons: ['Winter', 'Spring', 'Autumn'],
     bestMonths: ['December', 'January', 'February', 'March', 'April', 'November'],
-    coverImage: '/images/treks/brahmatal.jpg',
+    coverImage: './images/treks/brahmatal.jpg',
     galleryImages: [
-      '/images/treks/brahmatal.jpg',
+      './images/treks/brahmatal.jpg',
       'https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1200&q=80',
       'https://images.unsplash.com/photo-1602173574767-37ac01994b2a?auto=format&fit=crop&w=1200&q=80'
     ],
@@ -872,9 +872,9 @@ export const TREKS_DATA: Trek[] = [
     discountedPriceINR: 18500,
     bestSeasons: ['Summer', 'Monsoon', 'Autumn'],
     bestMonths: ['July', 'August', 'September', 'October'],
-    coverImage: '/images/treks/pin-bhaba.jpg',
+    coverImage: './images/treks/pin-bhaba.jpg',
     galleryImages: [
-      '/images/treks/pin-bhaba.jpg',
+      './images/treks/pin-bhaba.jpg',
       'https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=80',
       'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=80'
     ],
@@ -1021,9 +1021,9 @@ export const TREKS_DATA: Trek[] = [
     discountedPriceINR: 10500,
     bestSeasons: ['Spring', 'Summer', 'Autumn', 'Winter'],
     bestMonths: ['April', 'May', 'June', 'September', 'October', 'November', 'December'],
-    coverImage: '/images/treks/har-ki-dun.jpg',
+    coverImage: './images/treks/har-ki-dun.jpg',
     galleryImages: [
-      '/images/treks/har-ki-dun.jpg',
+      './images/treks/har-ki-dun.jpg',
       'https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=80',
       'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=80'
     ],
