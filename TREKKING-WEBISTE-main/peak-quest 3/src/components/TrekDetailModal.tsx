@@ -61,8 +61,37 @@ export const TrekDetailModal: React.FC<TrekDetailModalProps> = ({
   const [activeImageIdx, setActiveImageIdx] = useState<number>(0);
   const [checkedGear, setCheckedGear] = useState<Record<string, boolean>>({});
   const [copyFeedback, setCopyFeedback] = useState(false);
+  const [realPhotos, setRealPhotos] = useState<string[]>([]);
 
-  const images = [trek.coverImage, ...trek.galleryImages];
+  useEffect(() => {
+    if (!trek?.name) return;
+    const query = `${trek.name} ${trek.region} India`;
+    let cached: string | null = null;
+    try {
+      cached = sessionStorage.getItem(`place_gallery_${trek.id}`);
+    } catch {}
+
+    if (cached) {
+      try {
+        setRealPhotos(JSON.parse(cached));
+        return;
+      } catch {}
+    }
+
+    fetch(`/api/places/photo?query=${encodeURIComponent(query)}`)
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        if (data?.photos && data.photos.length > 0) {
+          setRealPhotos(data.photos);
+          try {
+            sessionStorage.setItem(`place_gallery_${trek.id}`, JSON.stringify(data.photos));
+          } catch {}
+        }
+      })
+      .catch(() => {});
+  }, [trek?.id, trek?.name, trek?.region]);
+
+  const images = realPhotos.length > 0 ? realPhotos : [trek.coverImage, ...trek.galleryImages];
 
   const handleToggleGearCheck = (item: string) => {
     setCheckedGear((prev) => ({

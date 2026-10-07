@@ -27,6 +27,7 @@ import {
 import Markdown from 'react-markdown';
 import { Trek, LiveWeatherReport, Destination } from '../types';
 import { DESTINATIONS_DATA } from '../data/destinations';
+import { fetchLiveWeather } from '../lib/weather';
 
 interface LiveWeatherModalProps {
   isOpen: boolean;
@@ -87,12 +88,14 @@ export const LiveWeatherModal: React.FC<LiveWeatherModalProps> = ({
       setIsLoading(true);
       try {
         const loc = allLocations.find(l => l.id === selectedTrekId);
-        const url = loc && loc.lat
-          ? `/api/weather?lat=${loc.lat}&lon=${loc.lon}&name=${encodeURIComponent(loc.name)}&altitude=${loc.altitudeM}&region=${encodeURIComponent(loc.state)}`
-          : `/api/weather?trekId=${selectedTrekId}`;
-        const res = await fetch(url);
-        if (!res.ok) throw new Error('Failed to load weather');
-        const data: LiveWeatherReport = await res.json();
+        const data = await fetchLiveWeather({
+          lat: loc?.lat,
+          lon: loc?.lon,
+          name: loc?.name || 'Selected Destination',
+          altitudeM: loc?.altitudeM || 1000,
+          region: loc?.state || 'India',
+          trekId: selectedTrekId,
+        });
         setWeatherData(data);
 
         // Fetch AI Advisory
@@ -105,7 +108,7 @@ export const LiveWeatherModal: React.FC<LiveWeatherModalProps> = ({
     };
 
     fetchWeather();
-  }, [selectedTrekId, isOpen]);
+  }, [selectedTrekId, isOpen, allLocations]);
 
   const fetchAdvisory = async (data: LiveWeatherReport) => {
     setIsLoadingAdvisory(true);
@@ -139,15 +142,16 @@ export const LiveWeatherModal: React.FC<LiveWeatherModalProps> = ({
     setIsLoading(true);
     try {
       const loc = allLocations.find(l => l.id === selectedTrekId);
-        const url = loc && loc.lat
-          ? `/api/weather?lat=${loc.lat}&lon=${loc.lon}&name=${encodeURIComponent(loc.name)}&altitude=${loc.altitudeM}&region=${encodeURIComponent(loc.state)}`
-          : `/api/weather?trekId=${selectedTrekId}`;
-        const res = await fetch(url);
-      if (res.ok) {
-        const data: LiveWeatherReport = await res.json();
-        setWeatherData(data);
-        fetchAdvisory(data);
-      }
+      const data = await fetchLiveWeather({
+        lat: loc?.lat,
+        lon: loc?.lon,
+        name: loc?.name || 'Selected Destination',
+        altitudeM: loc?.altitudeM || 1000,
+        region: loc?.state || 'India',
+        trekId: selectedTrekId,
+      });
+      setWeatherData(data);
+      fetchAdvisory(data);
     } catch (err) {
       console.error(err);
     } finally {
@@ -514,7 +518,22 @@ export const LiveWeatherModal: React.FC<LiveWeatherModalProps> = ({
                 </div>
               )}
             </>
-          ) : null}
+          ) : (
+            <div className="py-16 text-center space-y-4">
+              <CloudSun className="w-12 h-12 text-[#4A6741] mx-auto opacity-70" />
+              <div>
+                <p className="font-bold text-sm text-[#2D3633]">Live Satellite Syncing</p>
+                <p className="text-xs text-[#5C6662] mt-1">Connecting to mountain meteorological stations...</p>
+              </div>
+              <button
+                onClick={handleRefresh}
+                className="px-4 py-2 bg-[#4A6741] hover:bg-[#3D5636] text-white rounded-xl text-xs font-bold transition-colors shadow-sm inline-flex items-center gap-1.5"
+              >
+                <RefreshCw className="w-3.5 h-3.5" />
+                <span>Sync Mountain Weather</span>
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </div>

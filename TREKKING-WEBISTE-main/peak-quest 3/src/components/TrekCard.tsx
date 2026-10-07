@@ -43,7 +43,7 @@ export const TrekCard: React.FC<TrekCardProps> = ({
     difficulty: destination.difficulty || 'Moderate',
     coverImage: destination.coverImage,
     galleryImages: destination.galleryImages || [],
-    tagline: destination.description.slice(0, 80) + '...',
+    tagline: (destination.description ? destination.description.slice(0, 80) + '...' : ''),
     highlights: destination.highlights || [],
     maxAltitudeM: destination.altitudeM || 0,
     maxAltitudeFt: Math.round((destination.altitudeM || 0) * 3.28084),
@@ -64,7 +64,8 @@ export const TrekCard: React.FC<TrekCardProps> = ({
   return (
     <div 
       id={`trek-card-${data.id}`}
-      className="group bg-white rounded-3xl overflow-hidden border border-[#E8E4D9] shadow-xs hover:shadow-lg transition-all duration-300 flex flex-col justify-between hover:-translate-y-1"
+      onClick={() => onSelect(trek || destination)}
+      className="group bg-white rounded-3xl overflow-hidden border border-[#E8E4D9] shadow-xs hover:shadow-lg transition-all duration-300 flex flex-col justify-between hover:-translate-y-1 cursor-pointer"
     >
       {/* Card Media Header */}
       <div className="relative h-60 w-full overflow-hidden bg-[#1E2822]">
@@ -197,7 +198,10 @@ export const TrekCard: React.FC<TrekCardProps> = ({
               <button
                 id={`weather-btn-${data.id}`}
                 type="button"
-                onClick={() => onOpenWeather(trek || destination)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onOpenWeather(trek || destination);
+                }}
                 className="p-2.5 rounded-xl border border-[#E8E4D9] text-[#2D3633] hover:bg-[#4A6741]/15 hover:text-[#2D4F1E] hover:border-[#4A6741]/30 transition-colors text-xs font-semibold flex items-center gap-1"
                 title="View Live Mountain Weather"
               >
@@ -210,7 +214,10 @@ export const TrekCard: React.FC<TrekCardProps> = ({
               <button
                 id={`map-btn-${data.id}`}
                 type="button"
-                onClick={() => onOpenMap(trek || destination)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onOpenMap(trek || destination);
+                }}
                 className="p-2.5 rounded-xl border border-[#E8E4D9] text-[#2D3633] hover:bg-[#4A6741]/15 hover:text-[#2D4F1E] hover:border-[#4A6741]/30 transition-colors text-xs font-semibold flex items-center gap-1"
                 title="Get Directions to Basecamp"
               >
@@ -222,7 +229,10 @@ export const TrekCard: React.FC<TrekCardProps> = ({
             <button
               id={`view-trail-map-btn-${data.id}`}
               type="button"
-              onClick={() => onSelect(trek || destination)}
+              onClick={(e) => {
+                e.stopPropagation();
+                onSelect(trek || destination);
+              }}
               className="p-2.5 rounded-xl border border-[#E8E4D9] text-[#2D3633] hover:bg-[#F3F1EA] hover:text-[#2D4F1E] transition-colors text-xs font-semibold flex items-center gap-1"
               title="View Interactive Trail Map & Itinerary"
             >
@@ -234,7 +244,10 @@ export const TrekCard: React.FC<TrekCardProps> = ({
               <button
                 id={`book-trek-btn-${data.id}`}
                 type="button"
-                onClick={() => onQuickBook(trek || destination)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onQuickBook(trek || destination);
+                }}
                 className="bg-[#8B5E3C] hover:bg-[#734B2E] text-white font-bold px-3.5 py-2.5 rounded-xl text-xs transition-colors flex items-center gap-1 shadow-xs hover:shadow-md"
               >
                 <span>Book</span>

@@ -65,11 +65,11 @@ export const TREKS_DATA: Trek[] = [
     discountedPriceINR: 5000,
     bestSeasons: ['Spring', 'Summer', 'Autumn'],
     bestMonths: ['March', 'April', 'May', 'September', 'October', 'November'],
-    coverImage: 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=80',
+    coverImage: '/images/treks/triund.jpg',
     galleryImages: [
-      'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1200&q=80'
+      '/images/treks/triund.jpg',
+      'https://images.unsplash.com/photo-1551632811-561732d1e306?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1501854140801-50d01698950b?auto=format&fit=crop&w=1200&q=80'
     ],
     overview: 'Triund is one of the most picturesque weekend treks in Himachal Pradesh, offering dramatic close-up views of the snow-crested Dhauladhar range rising straight above the lush Kangra Valley. Perfectly suited for beginners and nature enthusiasts.',
     highlights: [
@@ -161,11 +161,11 @@ export const TREKS_DATA: Trek[] = [
     discountedPriceINR: 5200,
     bestSeasons: ['Autumn', 'Winter', 'Spring'],
     bestMonths: ['October', 'November', 'December', 'January', 'February', 'March', 'April'],
-    coverImage: 'https://images.unsplash.com/photo-1486870591958-9b9d0d1dda99?auto=format&fit=crop&w=1200&q=80',
+    coverImage: '/images/treks/nag-tibba.jpg',
     galleryImages: [
-      'https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=80'
+      '/images/treks/nag-tibba.jpg',
+      'https://images.unsplash.com/photo-1483728642387-6c3bdd6c93e5?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1589182373726-e4f658ab50f0?auto=format&fit=crop&w=1200&q=80'
     ],
     overview: 'Nag Tibba ("Serpent\'s Peak") is an ideal weekend winter summit trek in Uttarakhand. It offers breathtaking panoramic vistas of Bandarpoonch, Swargarohini, Gangotri, and Kedarnath peaks without requiring weeks of acclimatization.',
     highlights: [
@@ -252,11 +252,11 @@ export const TREKS_DATA: Trek[] = [
     discountedPriceINR: 7999,
     bestSeasons: ['Winter', 'Spring', 'Autumn'],
     bestMonths: ['December', 'January', 'February', 'March', 'April', 'November'],
-    coverImage: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1200&q=80',
+    coverImage: '/images/treks/kedarkantha.jpg',
     galleryImages: [
-      'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1486870591958-9b9d0d1dda99?auto=format&fit=crop&w=1200&q=80'
+      '/images/treks/kedarkantha.jpg',
+      'https://images.unsplash.com/photo-1573481078535-f07f2f5cc5e2?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1578894381163-e72c17f2d45f?auto=format&fit=crop&w=1200&q=80'
     ],
     overview: 'Kedarkantha is celebrated as the quintessential Himalayan winter trek. Standing atop its pyramid peak at 12,500 feet, you are surrounded by an amphitheater of 13 giant peaks including Swargarohini, Black Peak (Kalanag), and Bandarpoonch.',
     highlights: [
@@ -378,11 +378,11 @@ export const TREKS_DATA: Trek[] = [
     discountedPriceINR: 10499,
     bestSeasons: ['Summer', 'Monsoon', 'Autumn'],
     bestMonths: ['June', 'July', 'August', 'September', 'October'],
-    coverImage: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80',
+    coverImage: '/images/treks/hampta-pass.jpg',
     galleryImages: [
-      'https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=80',
+      '/images/treks/hampta-pass.jpg',
       'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1200&q=80'
+      'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=1200&q=80'
     ],
     overview: 'No other trek in India showcases such a radical, theatrical landscape shift. You begin in the lush pine forests and floral meadows of Manali, climb over the narrow notch of Hampta Pass (14,065 ft), and suddenly step into the raw, Martian landscapes of Lahaul & Spiti, finished by the turquoise waters of moon-shaped Chandratal Lake.',
     highlights: [
@@ -504,11 +504,11 @@ export const TREKS_DATA: Trek[] = [
     discountedPriceINR: 5999,
     bestSeasons: ['Summer', 'Autumn', 'Spring'],
     bestMonths: ['May', 'June', 'July', 'September', 'October'],
-    coverImage: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=80',
+    coverImage: '/images/treks/beas-kund.jpg',
     galleryImages: [
-      'https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1486870591958-9b9d0d1dda99?auto=format&fit=crop&w=1200&q=80'
+      '/images/treks/beas-kund.jpg',
+      'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1596195689404-24d8a8d1c6ea?auto=format&fit=crop&w=1200&q=80'
     ],
     overview: 'Beas Kund is a pristine high-altitude alpine lake cradled beneath towering 6,000-meter giants like Hanuman Tibba, Friendship Peak, and Ladakhi Peak. Legend holds that Sage Vyas meditated here while authoring the Mahabharata.',
     highlights: [
@@ -603,11 +603,11 @@ export const TREKS_DATA: Trek[] = [
     discountedPriceINR: 11800,
     bestSeasons: ['Monsoon', 'Summer'],
     bestMonths: ['July', 'August', 'September'],
-    coverImage: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80',
+    coverImage: '/images/treks/valley-of-flowers.jpg',
     galleryImages: [
-      'https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1200&q=80'
+      '/images/treks/valley-of-flowers.jpg',
+      'https://images.unsplash.com/photo-1528360983277-13d401cdc186?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1501854140801-50d01698950b?auto=format&fit=crop&w=1200&q=80'
     ],
     overview: 'A UNESCO World Heritage National Park nestled in the Chamoli Garhwal Himalayas. Between July and September, the high glacial valley bursts into a kaleidoscope of colors with rare Himalayan blue poppies, Brahma Kamals, orchids, and anemones, complemented by a pilgrimage trek to high altitude Hemkund Sahib.',
     highlights: [
@@ -737,11 +737,11 @@ export const TREKS_DATA: Trek[] = [
     discountedPriceINR: 8750,
     bestSeasons: ['Winter', 'Spring', 'Autumn'],
     bestMonths: ['December', 'January', 'February', 'March', 'April', 'November'],
-    coverImage: 'https://images.unsplash.com/photo-1486870591958-9b9d0d1dda99?auto=format&fit=crop&w=1200&q=80',
+    coverImage: '/images/treks/brahmatal.jpg',
     galleryImages: [
+      '/images/treks/brahmatal.jpg',
       'https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=80'
+      'https://images.unsplash.com/photo-1602173574767-37ac01994b2a?auto=format&fit=crop&w=1200&q=80'
     ],
     overview: 'Brahmatal is among the rare winter treks in India offering continuous, unobstructed face-to-face vistas of Mount Trishul (7,120m) and Nanda Ghunti (6,309m). Trekkers witness two glacial lakes—Bekaltal and Brahmatal—cradled in snow-clad wilderness.',
     highlights: [
@@ -872,11 +872,11 @@ export const TREKS_DATA: Trek[] = [
     discountedPriceINR: 18500,
     bestSeasons: ['Summer', 'Monsoon', 'Autumn'],
     bestMonths: ['July', 'August', 'September', 'October'],
-    coverImage: 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=80',
+    coverImage: '/images/treks/pin-bhaba.jpg',
     galleryImages: [
-      'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1200&q=80'
+      '/images/treks/pin-bhaba.jpg',
+      'https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=80'
     ],
     overview: 'Pin Bhaba is considered the grandest crossover pass in the Indian Himalayas. Starting from the lush apple orchards and dense cedar forests of Bhaba Valley in Kinnaur, you climb to an astonishing 16,125 feet before plunging into the purple and ochre desert canyons of Pin Valley in Spiti.',
     highlights: [
@@ -1021,11 +1021,11 @@ export const TREKS_DATA: Trek[] = [
     discountedPriceINR: 10500,
     bestSeasons: ['Spring', 'Summer', 'Autumn', 'Winter'],
     bestMonths: ['April', 'May', 'June', 'September', 'October', 'November', 'December'],
-    coverImage: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1200&q=80',
+    coverImage: '/images/treks/har-ki-dun.jpg',
     galleryImages: [
+      '/images/treks/har-ki-dun.jpg',
       'https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80'
+      'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=80'
     ],
     overview: 'Har Ki Dun ("Valley of Gods") is a hanging river valley in Govind Ballabh Pant National Park. Trekkers walk past centuries-old wooden villages like Osla and Gangad, gazing upon the dramatic Swargarohini peak, believed to be the stairway to heaven taken by Yudhishthira and his dog.',
     highlights: [

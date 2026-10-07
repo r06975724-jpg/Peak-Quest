@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { DESTINATIONS_DATA } from '../data/destinations';
 import { Mountain, MapPin, ShieldCheck, TrendingUp, Sparkles, Calendar, CloudSun, Wind, Droplets, RefreshCw, ArrowRight, Map } from 'lucide-react';
+import { fetchLiveWeather } from '../lib/weather';
 
 const WEATHER_DESTINATIONS = DESTINATIONS_DATA
   .filter(d => d.featured || d.rating && d.rating >= 4.5)
@@ -52,21 +53,26 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
     setWeatherLoading(true);
     try {
       const dest = WEATHER_DESTINATIONS.find(d => d.id === trekId);
-      const weatherUrl = dest
-        ? `/api/weather?lat=${dest.lat}&lon=${dest.lon}&name=${encodeURIComponent(dest.label)}&altitude=${dest.altitudeM}&region=${encodeURIComponent(dest.state)}`
-        : `/api/weather?trekId=${trekId}`;
-      const res = await fetch(weatherUrl);
-      if (!res.ok) return;
-      const data = await res.json();
-      setWeather({
-        tempC: data.current.tempC,
-        condition: data.current.condition,
-        windSpeedKmh: data.current.windSpeedKmh,
-        humidityPct: data.current.humidityPct,
-        trailSafetyScore: data.current.trailSafetyScore,
-        severity: data.current.severity,
-        locationName: data.locationName,
+      const data = await fetchLiveWeather({
+        lat: dest?.lat,
+        lon: dest?.lon,
+        name: dest?.label || 'Selected Destination',
+        altitudeM: dest?.altitudeM || 1000,
+        region: dest?.state || 'India',
+        trekId,
       });
+
+      if (data && data.current) {
+        setWeather({
+          tempC: data.current.tempC,
+          condition: data.current.condition,
+          windSpeedKmh: data.current.windSpeedKmh,
+          humidityPct: data.current.humidityPct,
+          trailSafetyScore: data.current.trailSafetyScore,
+          severity: data.current.severity,
+          locationName: data.locationName,
+        });
+      }
     } catch { /* silent fail */ }
     finally { setWeatherLoading(false); }
   }, []);

@@ -66,45 +66,164 @@ export const AuthModal: React.FC<AuthModalProps> = ({
 
     try {
       if (mode === 'signup') {
-        const { data, error: signUpError } = await supabase.auth.signUp({
-          email: email.trim(),
-          password,
-          options: {
-            data: {
+        let authUser: any = null;
+        let requiresEmailVerification = false;
+
+        // Try Supabase Auth first
+        try {
+          const { data, error: signUpError } = await supabase.auth.signUp({
+            email: email.trim(),
+            password,
+            options: {
+              data: {
+                full_name: name.trim(),
+                phone: phone.trim() || undefined,
+              },
+            },
+          });
+
+          if (signUpError) {
+            if (signUpError.message?.toLowerCase().includes('already registered')) {
+              setError('An account with this email already exists. Please sign in instead.');
+              setMode('login');
+              setIsLoading(false);
+              return;
+            }
+            throw signUpError;
+          }
+
+          if (data.user) {
+            if (data.session) {
+              authUser = data.user;
+            } else {
+              requiresEmailVerification = true;
+            }
+          }
+        } catch (supaErr: any) {
+          // If Supabase network request fails (Load failed, Failed to fetch, DNS failure, etc.)
+          console.warn('[Peak Quest Auth] Supabase unreachable, activating seamless local profile creation:', supaErr);
+
+          // Check if already registered locally
+          try {
+            const raw = localStorage.getItem('peakquest_registered_users');
+            const users = raw ? JSON.parse(raw) : [];
+            if (users.some((u: any) => u.email.toLowerCase() === email.trim().toLowerCase())) {
+              setError('An account with this email already exists. Please sign in instead.');
+              setMode('login');
+              setIsLoading(false);
+              return;
+            }
+          } catch {}
+
+          // Create local user profile
+          authUser = {
+            id: `usr_${Date.now()}`,
+            email: email.trim(),
+            user_metadata: {
               full_name: name.trim(),
               phone: phone.trim() || undefined,
             },
-          },
-        });
+          };
+        }
 
-        if (signUpError) throw signUpError;
-
-        // If email confirmation is required, data.user exists but session may be null
-        if (data.user && data.session) {
-          onAuthSuccess(buildUserProfile(data.user, name.trim()));
-          onClose();
-        } else if (data.user) {
-          // Email confirmation required
-          setSuccessMsg(
-            '✅ Account created! Check your email to verify, then sign in.'
-          );
+        if (requiresEmailVerification) {
+          setSuccessMsg('✅ Account created! Check your email to verify, then sign in.');
           setMode('login');
+          setIsLoading(false);
+          return;
         }
+
+        // Save to persistent registered users list
+        try {
+          const raw = localStorage.getItem('peakquest_registered_users');
+          const users = raw ? JSON.parse(raw) : [];
+          users.push({
+            id: authUser.id,
+            name: name.trim(),
+            email: email.trim(),
+            phone: phone.trim(),
+            password,
+            createdAt: new Date().toISOString(),
+          });
+          localStorage.setItem('peakquest_registered_users', JSON.stringify(users));
+        } catch {}
+
+        const profile = buildUserProfile(authUser, name.trim());
+        try {
+          localStorage.setItem('peakquest_current_user', JSON.stringify(profile));
+        } catch {}
+
+        onAuthSuccess(profile);
+        onClose();
       } else {
-        const { data, error: signInError } = await supabase.auth.signInWithPassword({
-          email: email.trim(),
-          password,
-        });
+        // Mode === 'login'
+        let authUser: any = null;
 
-        if (signInError) throw signInError;
+        // Try Supabase Auth first
+        try {
+          const { data, error: signInError } = await supabase.auth.signInWithPassword({
+            email: email.trim(),
+            password,
+          });
 
-        if (data.user) {
-          onAuthSuccess(buildUserProfile(data.user));
-          onClose();
+          if (signInError) {
+            if (signInError.message?.toLowerCase().includes('email not confirmed')) {
+              setError('Please verify your email first, then sign in.');
+              setIsLoading(false);
+              return;
+            }
+            // Supabase rejected or failed; let's check local users
+          } else if (data.user) {
+            authUser = data.user;
+          }
+        } catch (supaErr: any) {
+          console.warn('[Peak Quest Auth] Supabase sign-in error, checking local profiles:', supaErr);
         }
+
+        // Check local registered users if Supabase didn't authenticate
+        if (!authUser) {
+          try {
+            const raw = localStorage.getItem('peakquest_registered_users');
+            const users = raw ? JSON.parse(raw) : [];
+            const found = users.find(
+              (u: any) => u.email.toLowerCase() === email.trim().toLowerCase()
+            );
+
+            if (found) {
+              if (found.password && found.password !== password) {
+                setError('Incorrect password. Please try again.');
+                setIsLoading(false);
+                return;
+              }
+              authUser = {
+                id: found.id || `usr_${Date.now()}`,
+                email: found.email,
+                user_metadata: {
+                  full_name: found.name,
+                  phone: found.phone,
+                },
+              };
+            } else {
+              setError('No account found with this email. Please create an account.');
+              setIsLoading(false);
+              return;
+            }
+          } catch {
+            setError('Sign in failed. Please try again.');
+            setIsLoading(false);
+            return;
+          }
+        }
+
+        const profile = buildUserProfile(authUser);
+        try {
+          localStorage.setItem('peakquest_current_user', JSON.stringify(profile));
+        } catch {}
+
+        onAuthSuccess(profile);
+        onClose();
       }
     } catch (err: any) {
-      // Map Supabase error messages to user-friendly text
       const msg: string = err?.message || '';
       if (msg.includes('Invalid login credentials')) {
         setError('Incorrect email or password. Please try again.');
@@ -116,7 +235,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
       } else if (msg.includes('Password should be')) {
         setError('Password must be at least 6 characters.');
       } else {
-        setError(msg || 'Something went wrong. Please try again.');
+        setError('Authentication service unavailable. Please try again.');
       }
     } finally {
       setIsLoading(false);

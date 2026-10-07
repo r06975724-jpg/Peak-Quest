@@ -54,7 +54,7 @@ export default function App() {
   // ---------------------------------------------------------------------------
   const [reviews, setReviews] = useState<Review[]>(() => stored<Review[]>('peakquest_reviews', INITIAL_REVIEWS));
   const [bookings, setBookings] = useState<Booking[]>(() => stored<Booking[]>('peakquest_bookings', [demoBooking]));
-  const [currentUser, setCurrentUser] = useState<UserProfile | null>(null); // Managed by Supabase session
+  const [currentUser, setCurrentUser] = useState<UserProfile | null>(() => stored<UserProfile | null>('peakquest_current_user', null));
   const [savedIds, setSavedIds] = useState<string[]>(() => stored<string[]>('peakquest_saved_treks', []));
 
   // Filter state
@@ -86,47 +86,53 @@ export default function App() {
   // Supabase: restore session on page load + listen for auth state changes
   // ---------------------------------------------------------------------------
   useEffect(() => {
-    // Restore session if user was previously signed in
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      if (session?.user) {
-        const u = session.user;
-        setCurrentUser({
-          id: u.id,
-          name: u.user_metadata?.full_name || u.email?.split('@')[0] || 'Trekker',
-          email: u.email ?? '',
-          phone: u.user_metadata?.phone || '+91 98765 43210',
-          avatar: `https://ui-avatars.com/api/?name=${encodeURIComponent(
-            u.user_metadata?.full_name || u.email?.split('@')[0] || 'T'
-          )}&background=4A6741&color=FDFCF7&size=120`,
-          authMethod: 'email',
-          savedTreks: [],
-          experienceLevel: 'Intermediate',
-        });
-      }
-    });
+    // Restore session if user was previously signed in via Supabase
+    try {
+      supabase.auth.getSession().then(({ data: { session } }) => {
+        if (session?.user) {
+          const u = session.user;
+          setCurrentUser({
+            id: u.id,
+            name: u.user_metadata?.full_name || u.email?.split('@')[0] || 'Trekker',
+            email: u.email ?? '',
+            phone: u.user_metadata?.phone || '+91 98765 43210',
+            avatar: `https://ui-avatars.com/api/?name=${encodeURIComponent(
+              u.user_metadata?.full_name || u.email?.split('@')[0] || 'T'
+            )}&background=4A6741&color=FDFCF7&size=120`,
+            authMethod: 'email',
+            savedTreks: [],
+            experienceLevel: 'Intermediate',
+          });
+        }
+      }).catch(() => {
+        // Supabase network unreachable; preserves local storage user
+      });
+    } catch {}
 
     // Listen for future sign-in / sign-out events
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      if (session?.user) {
-        const u = session.user;
-        setCurrentUser({
-          id: u.id,
-          name: u.user_metadata?.full_name || u.email?.split('@')[0] || 'Trekker',
-          email: u.email ?? '',
-          phone: u.user_metadata?.phone || '+91 98765 43210',
-          avatar: `https://ui-avatars.com/api/?name=${encodeURIComponent(
-            u.user_metadata?.full_name || u.email?.split('@')[0] || 'T'
-          )}&background=4A6741&color=FDFCF7&size=120`,
-          authMethod: 'email',
-          savedTreks: [],
-          experienceLevel: 'Intermediate',
-        });
-      } else {
-        setCurrentUser(null);
-      }
-    });
+    try {
+      const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+        if (session?.user) {
+          const u = session.user;
+          setCurrentUser({
+            id: u.id,
+            name: u.user_metadata?.full_name || u.email?.split('@')[0] || 'Trekker',
+            email: u.email ?? '',
+            phone: u.user_metadata?.phone || '+91 98765 43210',
+            avatar: `https://ui-avatars.com/api/?name=${encodeURIComponent(
+              u.user_metadata?.full_name || u.email?.split('@')[0] || 'T'
+            )}&background=4A6741&color=FDFCF7&size=120`,
+            authMethod: 'email',
+            savedTreks: [],
+            experienceLevel: 'Intermediate',
+          });
+        } else if (event === 'SIGNED_OUT') {
+          setCurrentUser(null);
+        }
+      });
 
-    return () => subscription.unsubscribe();
+      return () => subscription?.unsubscribe();
+    } catch {}
   }, []);
 
   // ---------------------------------------------------------------------------
@@ -135,14 +141,25 @@ export default function App() {
   useEffect(() => { try { localStorage.setItem('peakquest_reviews', JSON.stringify(reviews)); } catch {} }, [reviews]);
   useEffect(() => { try { localStorage.setItem('peakquest_bookings', JSON.stringify(bookings)); } catch {} }, [bookings]);
   useEffect(() => { try { localStorage.setItem('peakquest_saved_treks', JSON.stringify(savedIds)); } catch {} }, [savedIds]);
+  useEffect(() => {
+    try {
+      if (currentUser) {
+        localStorage.setItem('peakquest_current_user', JSON.stringify(currentUser));
+      } else {
+        localStorage.removeItem('peakquest_current_user');
+      }
+    } catch {}
+  }, [currentUser]);
 
   // Geolocation
   useEffect(() => {
-    if (typeof navigator !== 'undefined') {
-      navigator.geolocation?.getCurrentPosition(
+    if (typeof navigator !== 'undefined' && navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
         (p) => setLocation({ lat: p.coords.latitude, lon: p.coords.longitude }),
-        () => undefined,
-        { enableHighAccuracy: true, timeout: 10000 }
+        () => {
+          setLocation({ lat: 18.5204, lon: 73.8567 });
+        },
+        { enableHighAccuracy: true, timeout: 15000, maximumAge: 0 }
       );
     }
   }, []);
@@ -154,7 +171,8 @@ export default function App() {
   const scroll = () => section.current?.scrollIntoView({ behavior: 'smooth' });
 
   const handleLogout = async () => {
-    await supabase.auth.signOut();
+    try { await supabase.auth.signOut(); } catch {}
+    try { localStorage.removeItem('peakquest_current_user'); } catch {}
     setCurrentUser(null);
     notify('You have been signed out.');
   };
@@ -177,11 +195,19 @@ export default function App() {
   // ---------------------------------------------------------------------------
   // Filtering & sorting
   // ---------------------------------------------------------------------------
+
+  // Determine if user has applied any active search/filter
+  const isFiltering = !!(search || state || type !== 'All' || difficulty !== 'All' || season !== 'All' || maxPrice < 50000 || sortBy !== 'featured');
+
   const results = destinations
     .filter((d) => {
       const trek = linked(d);
       const q = search.toLowerCase();
       const price = trek?.discountedPriceINR || trek?.startingPriceINR || 0;
+
+      // When no filters are active, show only featured/popular treks on homepage
+      if (!isFiltering && !d.featured) return false;
+
       return (
         (!state || d.state === state) &&
         (type === 'All' || d.type === type) &&
@@ -226,11 +252,19 @@ export default function App() {
 
       <main ref={section} className="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 w-full">
         <div className="mb-8">
-          <span className="text-xs font-bold text-[#2D4F1E] uppercase tracking-wider">All-India Discovery Catalog</span>
+          <span className="text-xs font-bold text-[#2D4F1E] uppercase tracking-wider">
+            {isFiltering ? 'Search Results' : 'Popular Picks'}
+          </span>
           <h2 className="text-2xl sm:text-3xl font-extrabold font-heading">
-            {state === '' ? 'Treks & Forts Across India' : `${state} Discoveries`}
+            {isFiltering
+              ? (state ? `${state} Discoveries` : `${results.length} Trek${results.length !== 1 ? 's' : ''} Found`)
+              : 'Popular Treks & Destinations'}
           </h2>
-          <p className="text-[#5C6662] text-sm mt-1">Explore trails, heritage forts, live weather, and directions.</p>
+          <p className="text-[#5C6662] text-sm mt-1">
+            {isFiltering
+              ? 'Showing all matching results. Clear filters to see popular picks.'
+              : 'Handpicked top-rated treks across India. Use search or filters to discover more.'}
+          </p>
         </div>
 
         <FilterBar
